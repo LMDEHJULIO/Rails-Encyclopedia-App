@@ -1,4 +1,5 @@
 class ArticlesController < ApplicationController
+	before_action :find_article, only: [:show, :edit, :destroy]
 	def index
 	end 
 	def new
@@ -14,12 +15,17 @@ class ArticlesController < ApplicationController
 		end 
 	end 
 
+	def show 
+		@article = Article.find(params[:id])
+	end 
+
 	private
 
 	def article_params 
 		params.require(:article).permit(:title, :content)
 	end
 	def find_article
+		@article = Article.find(params[:id])
 	end 
 
 end
